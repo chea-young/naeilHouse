@@ -407,7 +407,7 @@
                 return ;
             }
 
-            let url = "/consumer/item/"+id+"/purchase";
+            let url = "/item/"+id+"/purchase";
             fetch(url)
                 .then((response) => response.json())
                 .then(alert("주문  파이지로 이동합니다."));

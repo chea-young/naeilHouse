@@ -232,7 +232,7 @@ public class ConsumerController {
     /**
      *  상품 상세 -> 바로 구매시 (결제 준비 페이지)
      */
-    @GetMapping("/consumer/item/{id}/purchase")
+    @GetMapping("/item/{id}/purchase")
     public String beforePurchase(@PathVariable Long id,
                            @SessionAttribute(name = SessionConstants.LOGIN_MEMBER, required = false) Consumer loginConsumer,
                            Model model) {
@@ -260,7 +260,7 @@ public class ConsumerController {
     /**
      *  결제 준비 페이지 -> 결제하기 (상품 1개) : 결제 완료 페이지로 이동
      */
-    @PostMapping("/consumer/item/{id}/purchase")
+    @PostMapping("/item/{id}/purchase")
     public String afterPurchase(@PathVariable Long id,
                            @SessionAttribute(name = SessionConstants.LOGIN_MEMBER) Consumer loginConsumer,
                            Model model) {
@@ -274,10 +274,7 @@ public class ConsumerController {
 
         // 주문 생성
         Long orderId = orderService.order(consumerId, itemId, 1); // 주문
-        /*Optional<Order> completedOrder = orderService.findOrder(orderId); // 주문 완료된 객체 반환
-        List<OrderItem> orderItems = completedOrder.get().getOrderItems();*/
 
-//        model.addAttribute("orderItems", orderItems);
         model.addAttribute("totalPrice", item.getPrice());
         model.addAttribute("orderItems", item);
 

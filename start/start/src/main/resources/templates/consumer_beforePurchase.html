@@ -258,7 +258,7 @@
         <!-- 구매 하기 (Rectangle) -->
         <div id="u30" class="ax_default shape" data-label="구매하기">
             <div id="u30_div" class=""></div>
-            <form th:action="@{/consumer/item/{id}/purchase (id=${item.id})}" method="post">
+            <form th:action="@{/item/{id}/purchase (id=${item.id})}" method="post">
                 <div id="u30_text" class="text">
                     <input type="submit" th:value="구매하기" id="u30_input" style="cursor: pointer">
                 </div>

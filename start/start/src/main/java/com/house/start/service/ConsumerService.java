@@ -111,7 +111,7 @@ public class ConsumerService {
 
         orderItem.setOrderItemStatus(OrderItemStatus.COMPLETED);
         delivery.setDeliveryStatus(DeliveryStatus.COMPLETE);
-        order.setOrderStatus(OrderStatus.COMPLETE);
+//        order.setOrderStatus(OrderStatus.COMPLETE);
 
         deliveryRepository.save(delivery);
 

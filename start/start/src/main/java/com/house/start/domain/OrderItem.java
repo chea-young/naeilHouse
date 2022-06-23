@@ -53,6 +53,14 @@ public class OrderItem {
         orderItem.setCount(count);
 
         item.removeStock(count);
+
+        // 배송 객체 생성
+        Delivery delivery = new Delivery();
+        delivery.setAddress("서울");
+        delivery.setDeliveryStatus(DeliveryStatus.PREPARING);
+
+        orderItem.setDelivery(delivery);
+
         return orderItem;
     }
 
