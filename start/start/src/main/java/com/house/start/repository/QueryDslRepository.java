@@ -2,8 +2,10 @@ package com.house.start.repository;
 
 import static com.house.start.domain.QPost.*;
 import static com.house.start.domain.QItem.*;
+import static com.house.start.domain.QCartItem.*;
 
 import com.house.start.domain.Item;
+import com.house.start.domain.dto.Cart.CartItemDTO;
 import com.house.start.domain.dto.Item.ItemDTO;
 import com.house.start.domain.dto.Post.PostDTO;
 import com.querydsl.core.types.Projections;
@@ -36,4 +38,11 @@ public class QueryDslRepository {
                 .fetch();
     }
 
+    public List<CartItemDTO> getCartItems(Long id) {
+        return jpaQueryFactory.from(cartItem)
+                .select(Projections.bean(CartItemDTO.class, item.name, cartItem.count, item.price))
+                .innerJoin(item).on(item.id.eq(cartItem.item.id))
+                .where(cartItem.cart.id.eq(id))
+                .fetch();
+    }
 }

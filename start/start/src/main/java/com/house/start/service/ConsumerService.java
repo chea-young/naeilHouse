@@ -2,26 +2,20 @@ package com.house.start.service;
 
 import com.house.start.domain.*;
 import com.house.start.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.house.start.domain.Consumer;
 import com.house.start.repository.ConsumerRepository;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ConsumerService {
-    private EntityManager em;
 
     private final PostRepository postRepository;
     private final DeliveryRepository deliveryRepository;
@@ -31,6 +25,8 @@ public class ConsumerService {
     private final LikeRepository likeRepository;
     private final CommentRepository commentRepository;
     private final CartRepository cartRepository;
+
+    private final QueryDslRepository dslRepository = null;
 
     /**
      * 상품
