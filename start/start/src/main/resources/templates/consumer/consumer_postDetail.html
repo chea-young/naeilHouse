@@ -425,7 +425,7 @@
   </body>
 <script>
   $(document).on('click', '.updateBtn', function() {
-    var parentDiv = $(this).closest('.parent_div');
+    let parentDiv = $(this).closest('.parent_div');
     $(parentDiv).find('.u34_text').css({"visibility":"hidden"});
     $(parentDiv).find('.modifyForm').css({"visibility":"visible"});
   })

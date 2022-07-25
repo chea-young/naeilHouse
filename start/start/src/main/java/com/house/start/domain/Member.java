@@ -57,7 +57,7 @@ public class Member implements Serializable {
      * **/
 
     @Builder
-    public Member( String name, String username, String password, String role, String email, UploadFile uploadFile) {
+    public Member( String name, String username, String password, Role role, String email, UploadFile uploadFile) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -68,7 +68,7 @@ public class Member implements Serializable {
 
     //Oauth Login
     @Builder(builderClassName = "Oauth2Register", builderMethodName = "OauthRegister")
-    public Member(String username, String password, String email, String role, UploadFile uploadFile) {
+    public Member(String username, String password, String email, Role role, UploadFile uploadFile) {
         this.name = username;
         this.password = password;
         this.email = email;

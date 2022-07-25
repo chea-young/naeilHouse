@@ -1,6 +1,8 @@
 package com.house.start.config;
 
 import com.house.start.auth.PrincipalOAuth2UserService;
+import com.house.start.repository.SecurityUrlMatcherRepository;
+import com.house.start.security.matcher.SecurityUrlMatcher;
 import com.house.start.security.provider.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -19,6 +21,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,6 +34,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private AuthenticationFailureHandler customAuthenticationFailureHandler;
+    @Autowired
+    private SecurityUrlMatcherRepository matcherRepository;
 
     @Bean
     public HttpFirewall defaultHttpFirewall() {
@@ -90,5 +96,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
+    private void matcherUrlAndAuthority(HttpSecurity httpSecurity) throws Exception {
+        List<SecurityUrlMatcher> urlMatchers = (List<SecurityUrlMatcher>) matcherRepository.findAll();
+        for (SecurityUrlMatcher matcher:
+                urlMatchers) {
+            httpSecurity.authorizeRequests()
+                    .antMatchers(matcher.getUrl()).hasAuthority(String.valueOf(matcher.getRole()));
+        }
+    }
 
 }
